@@ -11,7 +11,7 @@ export default class App extends Component {
     return (
       <div className='container'>
 
-        <Route exact path='/' component={BookShelf} />
+        <Route exact path='/' component={BookShelf}  />
         <Route path='/search' component={BookSearch} />
 
       </div>

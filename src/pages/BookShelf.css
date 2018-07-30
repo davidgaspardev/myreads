@@ -1,0 +1,40 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  box-shadow: 0 10px 20px rgba( 0, 0, 0, 0.19), 0 0 6px rgba( 0, 0, 0, 0.23);
+  background-color: #E74C3C;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+.header-title {
+  font-size: 16pt;
+  font-family: 'Pacifico', cursive;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.search-button {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+  font-size: 0;
+  background-color: #E74C3C;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-image: url('icons/plus.svg')
+}
+
+.search-button:hover {
+  background-color: #F08080;
+}
