@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+/** ==================== HEADER ==================== */
+
 .header {
   position: fixed;
   top: 0;
@@ -6,12 +11,12 @@
   z-index: 10;
   display: flex;
   box-shadow: 0 10px 20px rgba( 0, 0, 0, 0.19), 0 0 6px rgba( 0, 0, 0, 0.23);
-  background-color: #E74C3C;
+  height: 66.5px;
+  animation: bgHeader 5s infinite;
+  -webkit-animation: bgHeader 5s infinite;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
-
-.header-title {
+.header h1 {
   font-size: 16pt;
   font-family: 'Pacifico', cursive;
   width: 100%;
@@ -19,15 +24,52 @@
   color: white;
 }
 
+@keyframes bgHeader {
+  0%   { background-color: #E74C3C; }
+  50%  { background-color: #FFA07A; }
+  100% { background-color: #E74C3C; }
+}
+
+@-webkit-keyframes bgHeader {
+  0%   { background-color: #E74C3C; }
+  50%  { background-color: #FFA07A; }
+  100% { background-color: #E74C3C; }
+}
+
+/** ==================== MAIN ==================== */
+
+.main {
+  margin: 66.5px auto;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.main article {
+  display: flex;
+  flex-direction: row;
+}
+
+.main h2 {
+  padding: 5px;
+  margin: 10px;
+  width: 100%;
+  font-weight: 500;
+  font-family: 'Raleway', sans-serif;
+  color: #555555;
+  border-bottom: 2px solid rgba( 0, 0, 0, 0.19);
+}
+
+/** ==================== FOOTER ==================== */
+
 .search-button {
   position: fixed;
   right: 16px;
   bottom: 16px;
-  width: 72px;
-  height: 72px;
-  border-radius: 36px;
+  width: 50pt;
+  height: 50pt;
+  border-radius: 25pt;
   font-size: 0;
-  background-color: #E74C3C;
+  background-color: #FFA07A;
   background-size: 40px;
   background-repeat: no-repeat;
   background-position: center;
@@ -36,5 +78,5 @@
 }
 
 .search-button:hover {
-  background-color: #F08080;
+  background-color: #CD5C5C;
 }
