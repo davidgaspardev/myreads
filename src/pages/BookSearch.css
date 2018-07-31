@@ -1,0 +1,36 @@
+
+.bSearch-header div {
+  display: flex;
+  flex-direction: row;
+  max-width: 1250px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.bSearch-header a {
+  width: 55px;
+  height: 55px;
+  font-size: 0;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('icons/back.svg');
+
+  -webkit-transition: background-size 0.1s;
+  transition: background-size 0.1s;
+}
+
+.bSearch-header a:hover {
+  background-size: 30px;
+}
+
+.bSearch-header input {
+  background: transparent;
+  width: 100%;
+  margin: auto 20px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 1.2em;
+  outline: none;
+  padding: 5px;
+}

@@ -22,7 +22,7 @@ export default class BookShelf extends Component {
 
         <Main books={books}/>
 
-        <Link className='search-button' to='/search'>Search Book</Link>
+        <Link className='bShelf-search' to='/search'>Search Book</Link>
 
       </div>
     );
@@ -32,15 +32,15 @@ export default class BookShelf extends Component {
    * Functinal Stateless Components
    */
   Header = ({ children }) => (
-    <header className='header'>
+    <header className='bShelf-header'>
 
-      <h1 className='header-title'>{children}</h1>
+      <h1>{children}</h1>
 
     </header>
   );
 
   Main = ({ books }) => (
-    <main className='main'>
+    <main className='bShelf-main'>
 
       <article>
 
