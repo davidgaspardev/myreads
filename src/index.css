@@ -22,3 +22,9 @@ header {
   z-index: 10;
   box-shadow: 0 5px 5px rgba( 0, 0, 0, 0.2);
 }
+
+main {
+  margin: 66.5px auto;
+  max-width: 1250px;
+  width: 100%;
+}

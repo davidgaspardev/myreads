@@ -10,7 +10,6 @@ export default class BookShelf extends Component {
     myBooks: []
   }
 
-
   render() {
     const { Header, Main } = this;
     const { books } = this.state;

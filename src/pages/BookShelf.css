@@ -30,12 +30,6 @@
 
 /** ==================== MAIN ==================== */
 
-.bShelf-main {
-  margin: 66.5px auto;
-  max-width: 1250px;
-  width: 100%;
-}
-
 .bShelf-main article {
   display: flex;
   flex-direction: row;
