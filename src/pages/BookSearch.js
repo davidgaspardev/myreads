@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import * as BooksAPI from './utils/BooksAPI';
 
+import { Book } from './components/Book';
+
 import './BookSearch.css'
 
 export default class BookSearch extends Component {
@@ -23,7 +25,7 @@ export default class BookSearch extends Component {
     console.log(this.state);
 
     return(
-      <div className='container' >
+      <div className='bSearch-body' >
 
         <SearchBar query={query} />
 
@@ -50,10 +52,10 @@ export default class BookSearch extends Component {
   );
 
   Main = ({ books }) => (
-    <main>
+    <main className='bSearch-main'>
 
       {
-        books.map(item => <h6>{item.title}</h6>)
+        books.map((book, index) => <Book key={index} {...book} />)
       }
 
     </main>

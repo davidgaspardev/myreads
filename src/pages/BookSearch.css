@@ -1,4 +1,14 @@
 
+.bSearch-body {
+  width: 100%;
+  height: 100vh;
+  background-color: #FA8072;
+}
+
+.bSearch-header {
+  background-color: white;
+}
+
 .bSearch-header div {
   display: flex;
   flex-direction: row;
@@ -33,4 +43,10 @@
   font-size: 1.2em;
   outline: none;
   padding: 5px;
+}
+
+.bSearch-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
