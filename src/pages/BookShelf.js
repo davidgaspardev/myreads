@@ -1,3 +1,9 @@
+/**
+ * Component responsible for book management added by the user
+ * @author David Gaspar (davidgaspar.dev@gmail.com)
+ */
+
+// Modules (npm)
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -6,20 +12,27 @@ import './BookShelf.css';
 
 export default class BookShelf extends Component {
 
+  // Initialized state
   state = {
     myBooks: []
   }
 
+  /**
+   * @description Renders the components to the DOM
+   * @return {object} JSX (React.createElement())
+   */
   render() {
-    const { Header, Main } = this;
+    // Destructuring assignment
+    const { Header, MyBooks } = this;
     const { books } = this.state;
 
+    // Return JSX (React.createElement())
     return(
       <div className='body-page' >
 
         <Header>My Reads</Header>
 
-        <Main books={books}/>
+        <MyBooks books={books}/>
 
         <Link className='bShelf-search' to='/search'>Search Book</Link>
 
@@ -28,7 +41,8 @@ export default class BookShelf extends Component {
   }
 
   /**
-   * Functinal Stateless Components
+   * ============ Functinal Stateless Components ============
+   * @description Local components for UI composition
    */
   Header = ({ children }) => (
     <header className='bShelf-header'>
@@ -38,7 +52,7 @@ export default class BookShelf extends Component {
     </header>
   );
 
-  Main = ({ books }) => (
+  MyBooks = ({ books }) => (
     <main className='bShelf-main'>
 
       <article>

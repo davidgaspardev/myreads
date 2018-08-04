@@ -1,14 +1,24 @@
+/**
+ * Component responsible for browsing the books that are stored on the server (back-end)
+ * @author David Gaspar (davidgaspar.dev@gmail.com)
+ */
+
+// Modules (npm)
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// Back-end communication
 import * as BooksAPI from './utils/BooksAPI';
 
+// Composition components
 import { Book } from './components/Book';
 
+// Style Sheet
 import './BookSearch.css'
 
 export default class BookSearch extends Component {
 
+  // Initialized state
   state = {
     query: '',
     books: [],
@@ -18,23 +28,36 @@ export default class BookSearch extends Component {
     BooksAPI.getAll().then(books => this.setState({ books }));
   }
 
+  /**
+   * @description Renders the components to the DOM
+   * @return {object} JSX (React.createElement())
+   */
   render() {
-    const { SearchBar, Main } = this;
+    // Destructuring assignment
+    const { SearchBar, BookList } = this;
     const { query, books } = this.state;
 
-    console.log(this.state);
-
+    // Return JSX (React.createElement())
     return(
       <div className='bSearch-body' >
 
         <SearchBar query={query} />
 
-        <Main books={books} />
+        <BookList books={books} />
 
       </div>
     );
   }
 
+  /**
+   * ============ Functinal Stateless Components ============
+   * @description Local components for UI composition
+   */
+
+  /**
+   * @description Component of the search bar for the composition
+   * @param {object} Props - Containing onChangeEvent and query properties
+   */
   SearchBar = ({ onChangeEvent, query }) => (
     <header className='bSearch-header' >
 
@@ -51,7 +74,11 @@ export default class BookSearch extends Component {
     </header>
   );
 
-  Main = ({ books }) => (
+  /**
+   * @description component of the list of books for the composition
+   * @param {object} Props - Containing onChangeEvent and query properties
+   */
+  BookList = ({ books }) => (
     <main className='bSearch-main'>
 
       {
