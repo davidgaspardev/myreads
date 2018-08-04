@@ -1,10 +1,3 @@
-
-.bSearch-body {
-  width: 100%;
-  height: 100vh;
-  background-color: #FA8072;
-}
-
 .bSearch-header {
   background-color: white;
 }
@@ -49,4 +42,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  min-height: 100vh;
+  background-color: #FA8072;
 }

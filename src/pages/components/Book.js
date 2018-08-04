@@ -4,7 +4,11 @@ import './Book.css';
 export const Book = ({ title, subtitle, authors, imageLinks }) => (
   <div className='book'>
 
-    <img src={imageLinks.thumbnail} width='100%' alt />
+    <img src={imageLinks.thumbnail} alt />
+
+    <div>
+      <h1>{ title }</h1>
+    </div>
 
   </div>
 
