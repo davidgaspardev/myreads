@@ -11,6 +11,8 @@ import './Book.css';
 
 function handleShowAuthors(authors) {
 
+  if(typeof(authors) === 'undefined') return 'author not specified';
+
   let len = authors.length;
 
   if(len > 1) {
@@ -31,7 +33,13 @@ export const Book = ({ title, subtitle, authors, imageLinks }) => (
       <img src={imageLinks.thumbnail} alt={`${title} book`} />
 
       <div className='book-button'>
-
+        <select>
+          <option disabled>Move to...</option>
+          <option>Currently Reading</option>
+          <option>Want to Read</option>
+          <option>Read</option>
+          <option>None</option>
+        </select>
       </div>
 
     </div>

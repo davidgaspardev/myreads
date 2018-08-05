@@ -21,11 +21,12 @@ export default class BookSearch extends Component {
   // Initialized state
   state = {
     query: '',
-    books: [],
+    books: []
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then(books => this.setState({ books }));
+
+    BooksAPI.search('').then(books => this.setState({ books }));
   }
 
   /**
@@ -82,7 +83,11 @@ export default class BookSearch extends Component {
     <main className='bSearch-main'>
 
       {
-        books.length === 0 ? <div className='bSearch-loading' /> : books.map((book, index) => <Book key={index} {...book} />)
+        typeof(books) === 'undefined' ? (
+          <h1 className='bSearch-empty-entry' >Type something to do your research</h1>
+        ) : (
+          books.length === 0 ? <div className='bSearch-loading' /> : books.map((book, index) => <Book key={index} {...book} />)
+        )
       }
 
     </main>

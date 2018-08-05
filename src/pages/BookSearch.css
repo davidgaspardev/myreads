@@ -1,7 +1,5 @@
-.bSearch-body {
-  background-color: #FA8072;
-  height: 100%;
-}
+
+/** ==================== HEADER ==================== */
 
 .bSearch-header div {
   display: flex;
@@ -39,6 +37,13 @@
   padding: 5px;
 }
 
+/** ==================== MAIN ==================== */
+
+.bSearch-body {
+  background-color: #FA8072;
+  height: 100%;
+}
+
 .bSearch-main {
   display: flex;
   flex-direction: row;
@@ -61,4 +66,18 @@
   background-size: 90px;
   background-color: white;
   border-radius: 50%;
+}
+
+.bSearch-empty-entry {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 50px;
+  margin-top: -25px;
+  color: white;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-weight: normal;
+  font-size: 30pt;
 }
