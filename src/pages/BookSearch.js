@@ -38,7 +38,7 @@ export default class BookSearch extends Component {
     const { query, books } = this.state;
 
     // Return JSX (React.createElement())
-    return(
+    return (
       <div className='bSearch-body' >
 
         <SearchBar query={query} />
@@ -82,7 +82,7 @@ export default class BookSearch extends Component {
     <main className='bSearch-main'>
 
       {
-        books.map((book, index) => <Book key={index} {...book} />)
+        books.length === 0 ? <div className='bSearch-loading' /> : books.map((book, index) => <Book key={index} {...book} />)
       }
 
     </main>

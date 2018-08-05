@@ -27,9 +27,16 @@ function handleShowAuthors(authors) {
 export const Book = ({ title, subtitle, authors, imageLinks }) => (
   <div className='book'>
 
-    <img src={imageLinks.thumbnail} alt={`${title} book`} />
+    <div className='book-container-img' >
+      <img src={imageLinks.thumbnail} alt={`${title} book`} />
 
-    <div>
+      <div className='book-button'>
+
+      </div>
+
+    </div>
+
+    <div className='book-info'>
       <h1>{ title }</h1>
       <h3>{ handleShowAuthors(authors) }</h3>
     </div>
