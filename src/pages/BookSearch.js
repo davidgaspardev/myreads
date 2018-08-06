@@ -21,12 +21,52 @@ export default class BookSearch extends Component {
   // Initialized state
   state = {
     query: '',
-    books: []
+    books: [],
+    isLoading: false
   }
 
-  componentDidMount() {
 
-    BooksAPI.search('').then(books => this.setState({ books }));
+  handleSearch(query) {
+
+    this.setState({ isLoading: query !== '' }, () => (
+
+      // Sending request (async)
+      BooksAPI.search(query).then(books => {
+
+        // Check if you have received book vector from server
+        // If no, books variable is empty
+        if(!Array.isArray(books)) books = [];
+
+        console.log(`(typed: ${query}) SERVER | response: `, books);
+
+        // Finish loading
+        this.setState({ books, isLoading: false });
+
+      })
+
+    ));
+
+  }
+
+  handleBookRender() {
+    const { query, books } = this.state;
+
+    if(query === '') {
+
+      return <h1 className='bSearch-empty-entry' >Type something to do your research</h1>;
+
+    }
+
+    if(books.length > 0) {
+
+      return books.map((book, index) => <Book key={index} {...book} />);
+
+    } else {
+
+      return <h1 className='bSearch-empty-entry' >We did not even find a book... Sorry</h1>;
+
+    }
+
   }
 
   /**
@@ -68,6 +108,8 @@ export default class BookSearch extends Component {
 
         <input
           placeholder='Search books here... :)'
+          value={query}
+          onChange={ ({ target }) => this.setState({ query: target.value} , () => this.handleSearch(target.value.trim())) }
         />
 
       </div>
@@ -83,10 +125,14 @@ export default class BookSearch extends Component {
     <main className='bSearch-main'>
 
       {
-        typeof(books) === 'undefined' ? (
-          <h1 className='bSearch-empty-entry' >Type something to do your research</h1>
+        this.state.isLoading ? (
+
+          <div className='bSearch-loading' />
+
         ) : (
-          books.length === 0 ? <div className='bSearch-loading' /> : books.map((book, index) => <Book key={index} {...book} />)
+
+          this.handleBookRender()
+
         )
       }
 

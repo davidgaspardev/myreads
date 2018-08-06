@@ -26,29 +26,43 @@ function handleShowAuthors(authors) {
   return authors;
 }
 
-export const Book = ({ title, subtitle, authors, imageLinks }) => (
-  <div className='book'>
+function createLink(authors) {
 
-    <div className='book-container-img' >
-      <img src={imageLinks.thumbnail} alt={`${title} book`} />
+  let qValue = '';
 
-      <div className='book-button'>
-        <select>
-          <option disabled>Move to...</option>
-          <option>Currently Reading</option>
-          <option>Want to Read</option>
-          <option>Read</option>
-          <option>None</option>
-        </select>
+  for(let i = 0; i < authors.length; ++i) qValue += authors[i];
+
+  return `https://www.google.com/search?q=${qValue}`;
+
+}
+
+export const Book = ({ title, subtitle, authors, imageLinks }) => {
+
+  authors = handleShowAuthors(authors);
+
+  return (
+    <div className='book'>
+
+      <div className='book-container-img' >
+        <img src={imageLinks.thumbnail} alt={`${title} book`} />
+
+        <div className='book-button'>
+          <select>
+            <option disabled>Move to...</option>
+            <option>Currently Reading</option>
+            <option>Want to Read</option>
+            <option>Read</option>
+            <option>None</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div className='book-info'>
+        <h1>{ title }</h1>
+        <a href={createLink(authors)} target='_blank' >{authors}</a>
       </div>
 
     </div>
-
-    <div className='book-info'>
-      <h1>{ title }</h1>
-      <h3>{ handleShowAuthors(authors) }</h3>
-    </div>
-
-  </div>
-
-);
+  );
+}
