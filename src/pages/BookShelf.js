@@ -14,7 +14,18 @@ export default class BookShelf extends Component {
 
   // Initialized state
   state = {
-    myBooks: []
+    currentlyReading: [],
+    wantToRead: [],
+    read: [],
+    isLoading: true
+  }
+
+  handleShowBooks(category) {
+    const { isLoading } = this.state;
+
+    if(isLoading) return <div className='bShelf-loading' />
+
+
   }
 
   /**
@@ -59,7 +70,7 @@ export default class BookShelf extends Component {
 
         <h2><strong>C</strong>urrently <strong>R</strong>eading</h2>
 
-        { /** code HERE */ }
+        { this.handleShowBooks() }
 
       </article>
 
@@ -67,7 +78,7 @@ export default class BookShelf extends Component {
 
         <h2><strong>W</strong>ant to <strong>R</strong>ead</h2>
 
-        { /** code HERE */ }
+        { this.handleShowBooks() }
 
       </article>
 
@@ -75,7 +86,7 @@ export default class BookShelf extends Component {
 
         <h2><strong>R</strong>ead</h2>
 
-        { /** code HERE */ }
+        { this.handleShowBooks() }
 
       </article>
 
