@@ -18,6 +18,13 @@ import './BookSearch.css'
 
 export default class BookSearch extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.handleAddBook = this.handleAddBook.bind(this);
+
+  }
+
   // Initialized state
   state = {
     query: '',
@@ -37,14 +44,19 @@ export default class BookSearch extends Component {
         // If no, books variable is empty
         if(!Array.isArray(books)) books = [];
 
-        console.log(`(typed: ${query}) SERVER | response: `, books);
-
         // Finish loading
         this.setState({ books, isLoading: false });
 
       })
 
     ));
+
+  }
+
+  handleAddBook = (book, shelf) => {
+    const { query } = this.state;
+    // Validation of arguments
+    if(typeof(book) === 'object' && typeof(shelf) === 'string') BooksAPI.update(book, shelf).then(() => this.handleSearch(query));
 
   }
 
@@ -59,7 +71,9 @@ export default class BookSearch extends Component {
 
     if(books.length > 0) {
 
-      return books.map((book, index) => <Book key={index} {...book} />);
+      console.log(books);
+
+      return books.map((book, index) => <Book key={index} {...book} eventAddBook={ this.handleAddBook } />);
 
     } else {
 

@@ -27,16 +27,27 @@
 
 /** ==================== MAIN ==================== */
 
+.bShelf-body {
+  background-color: #f7e6e0;
+  min-height: 100vh;
+}
+
+.bShelf-alert {
+  font-family: 'Pacifico', cursive;
+  color: #ad6f69;
+}
+
 .bShelf-items {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .bShelf-main h2 {
   padding: 5px;
   margin: 10px;
-  width: 100%;
   font-weight: 500;
   font-family: 'Raleway', sans-serif;
   color: #555555;

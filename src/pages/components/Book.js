@@ -9,6 +9,7 @@ import React from 'react';
 // Style Sheet
 import './Book.css';
 
+// Responsible for string concatenation with authors' names
 function handleShowAuthors(authors) {
 
   if(typeof(authors) === 'undefined') return 'author not specified';
@@ -36,23 +37,24 @@ function createLink(authors) {
 
 }
 
-export const Book = ({ title, subtitle, authors, imageLinks }) => {
+export const Book = ({ id, title, subtitle, authors, imageLinks, shelf, eventAddBook }) => {
 
   authors = handleShowAuthors(authors);
+
+  let shelfs = ['currentlyReading', 'wantToRead', 'read', 'none']
 
   return (
     <div className='book'>
 
       <div className='book-container-img' >
-        <img src={imageLinks.thumbnail} alt={`${title} book`} />
+        <img src={typeof(imageLinks) !== 'undefined' && imageLinks.thumbnail} alt={`${title} book`} />
 
         <div className='book-button'>
-          <select>
-            <option disabled>Move to...</option>
-            <option>Currently Reading</option>
-            <option>Want to Read</option>
-            <option>Read</option>
-            <option>None</option>
+          <select defaultValue={shelf} onChange={option => eventAddBook({ id: id }, option.target.value)} >
+            <option value={shelfs[0]} disabled={shelf === shelfs[0]} >Currently Reading</option>
+            <option value={shelfs[1]} disabled={shelf === shelfs[1]} >Want to Read</option>
+            <option value={shelfs[2]} disabled={shelf === shelfs[2]} >Read</option>
+            <option value={shelfs[3]} disabled={shelf === shelfs[3]} >None</option>
           </select>
         </div>
 

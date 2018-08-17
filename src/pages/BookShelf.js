@@ -7,7 +7,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import EnumBooks from './utils/EnumBooks';
 import * as BooksAPI from './utils/BooksAPI';
 import { Book } from './components/Book';
 
@@ -16,47 +15,38 @@ import './BookShelf.css';
 
 export default class BookShelf extends Component {
 
+
   // Initialized state
   state = {
     currentlyReading: [],
     wantToRead: [],
     read: [],
-    isLoading: true
+    isLoading: true,
+    update: false
   }
 
-  handleShowBooks(category) {
-    const { currentlyReading, wantToRead, read, isLoading } = this.state;
+  handleAddBook = (book, shelf) => {
 
-    if(isLoading) return <div className='bShelf-loading' />;
+    console.log(shelf);
 
-    switch(category) {
-      case EnumBooks.CURRENTLY_READING:
-
-        return currentlyReading.map((book, index) => <Book key={index} {...book} />);
-
-      break;
-
-      case EnumBooks.WANT_TO_READ:
-
-        return wantToRead.map((book, index) => <Book key={index} {...book} />);
-
-      break;
-
-      case EnumBooks.READ:
-
-        return read.map((book, index) => <Book key={index} {...book}/>);
-
-      break;
-
-      default:
-        console.log('[ ERROR ] ', category)
-
-    }
-
+    // Validation of arguments
+    if(typeof(book) === 'object' && typeof(shelf) === 'string') BooksAPI.update(book, shelf).then(() => this.renderShelfUpdate());
 
   }
 
-  componentDidMount() {
+  handleShowBooks(shelf) {
+    const { state } = this;
+
+    if(state.isLoading) return <div className='bShelf-loading' />;
+
+    let shelves = state[shelf].map((book, index) => <Book key={index} {...book} eventAddBook={this.handleAddBook} />);
+
+    if(shelves.length > 0) return shelves;
+
+  }
+
+  // Update book list
+  renderShelfUpdate() {
 
     BooksAPI.getAll().then(books => this.setState(() => {
       let newState = {
@@ -66,26 +56,11 @@ export default class BookShelf extends Component {
         isLoading: false
       };
 
+      console.log(books);
+
       books.map(book => {
 
-        switch(book.shelf) {
-
-          case Object.keys(newState)[0]:
-            newState.currentlyReading.push(book);
-          break;
-
-          case Object.keys(newState)[1]:
-            newState.wantToRead.push(book);
-          break;
-
-          case Object.keys(newState)[2]:
-            newState.read.push(book);
-          break;
-
-          default:
-           console.log('[ ERROR ]', book);
-
-        }
+        newState[book.shelf].push(book);
 
         return book;
 
@@ -94,6 +69,12 @@ export default class BookShelf extends Component {
       return newState;
 
     }));
+
+  }
+
+  componentDidMount() {
+
+    this.renderShelfUpdate();
 
   }
 
@@ -107,7 +88,7 @@ export default class BookShelf extends Component {
 
     // Return JSX (React.createElement())
     return(
-      <div className='body-page' >
+      <div className='bShelf-body' >
 
         <Header>My Reads</Header>
 
@@ -140,7 +121,7 @@ export default class BookShelf extends Component {
 
         <div className='bShelf-items'>
 
-          { this.handleShowBooks(EnumBooks.CURRENTLY_READING) }
+          { this.handleShowBooks(Object.keys(this.state)[0]) }
 
         </div>
 
@@ -152,7 +133,7 @@ export default class BookShelf extends Component {
 
         <div className='bShelf-items'>
 
-          { this.handleShowBooks(EnumBooks.WANT_TO_READ) }
+          { this.handleShowBooks(Object.keys(this.state)[1]) }
 
         </div>
 
@@ -164,7 +145,7 @@ export default class BookShelf extends Component {
 
         <div className='bShelf-items'>
 
-          { this.handleShowBooks(EnumBooks.READ) }
+          { this.handleShowBooks(Object.keys(this.state)[2]) }
 
         </div>
 
