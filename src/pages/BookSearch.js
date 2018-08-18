@@ -77,7 +77,7 @@ export default class BookSearch extends Component {
 
     } else {
 
-      return <h1 className='bSearch-empty-entry' >We did not even find a book... Sorry</h1>;
+      return <h1 className='bSearch-empty-entry' >We did not find this book ... Sorry</h1>;
 
     }
 

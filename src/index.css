@@ -22,12 +22,13 @@ header {
   left: 0;
   right: 0;
   z-index: 10;
-  box-shadow: 0 5px 5px rgba( 0, 0, 0, 0.2);
+  box-shadow: 0 0px 5px rgba( 0, 0, 0, 0.2);
   background-color: white;
 }
 
 main {
   padding-top: 60px;
+  padding-bottom: 60px;
   margin: auto;
   max-width: 1250px;
   width: 100%;

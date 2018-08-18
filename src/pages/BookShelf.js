@@ -35,6 +35,7 @@ export default class BookShelf extends Component {
   }
 
   handleShowBooks(shelf) {
+    // Destructuring assignment
     const { state } = this;
 
     if(state.isLoading) return <div className='bShelf-loading' />;
@@ -42,6 +43,8 @@ export default class BookShelf extends Component {
     let shelves = state[shelf].map((book, index) => <Book key={index} {...book} eventAddBook={this.handleAddBook} />);
 
     if(shelves.length > 0) return shelves;
+    // If you have nothing on the shelf
+
 
   }
 
