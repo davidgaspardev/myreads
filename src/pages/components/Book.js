@@ -27,6 +27,7 @@ function handleShowAuthors(authors) {
   return authors;
 }
 
+// Links for the authors
 function createLink(authors) {
 
   let qValue = '';
@@ -37,17 +38,23 @@ function createLink(authors) {
 
 }
 
+// Book view
 export const Book = ({ id, title, subtitle, authors, imageLinks, shelf, eventAddBook }) => {
 
   authors = handleShowAuthors(authors);
 
-  let shelfs = ['currentlyReading', 'wantToRead', 'read', 'none']
+  // If you do not have a shelf category
+  if(shelf === undefined) shelf = 'none';
+
+  // Categories shelfs
+  let shelfs = ['currentlyReading', 'wantToRead', 'read', 'none'];
 
   return (
     <div className='book'>
 
       <div className='book-container-img' >
-        <img src={typeof(imageLinks) !== 'undefined' && imageLinks.thumbnail} alt={`${title} book`} />
+
+        <img src={typeof(imageLinks) !== 'undefined' && imageLinks.thumbnail } alt={`${title} book`} />
 
         <div className='book-button'>
           <select defaultValue={shelf} onChange={option => eventAddBook({ id: id }, option.target.value)} >

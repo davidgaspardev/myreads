@@ -12,6 +12,7 @@ import * as BooksAPI from './utils/BooksAPI';
 
 // Composition components
 import { Book } from './components/Book';
+//import { Footer } from './components/Footer';
 
 // Style Sheet
 import './BookSearch.css'
@@ -23,12 +24,16 @@ export default class BookSearch extends Component {
 
     this.handleAddBook = this.handleAddBook.bind(this);
 
+    // It do not need to refresh the rendering
+    BooksAPI.getAll().then(myBooks => this.state.myBooks = myBooks);
+
   }
 
   // Initialized state
   state = {
     query: '',
     books: [],
+    myBooks: [],
     isLoading: false
   }
 
@@ -61,7 +66,7 @@ export default class BookSearch extends Component {
   }
 
   handleBookRender() {
-    const { query, books } = this.state;
+    const { query, books, myBooks } = this.state;
 
     if(query === '') {
 
@@ -71,9 +76,17 @@ export default class BookSearch extends Component {
 
     if(books.length > 0) {
 
-      console.log(books);
+      return books.map((book, index) => {
 
-      return books.map((book, index) => <Book key={index} {...book} eventAddBook={ this.handleAddBook } />);
+        for(var i = 0; i < myBooks.length; i++) {
+
+          if(book.id === myBooks[i].id) return <Book key={index} {...book} eventAddBook={ this.handleAddBook } shelf={ myBooks[i].shelf } />;
+
+        }
+
+        return <Book key={index} {...book} eventAddBook={ this.handleAddBook } />;
+
+      });
 
     } else {
 

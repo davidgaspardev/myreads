@@ -1,0 +1,18 @@
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+}
+
+.footer-text {
+  margin: 5px;
+  font-weight: normal;
+  font-family: 'Raleway', sans-serif;
+  color: grey;
+}
+
+.footer-img {
+  margin: 5px;
+  width: 35px;
+  height: 35px;
+}

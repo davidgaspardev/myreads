@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 import * as BooksAPI from './utils/BooksAPI';
 import { Book } from './components/Book';
+import { Footer } from './components/Footer';
 
 // Style Sheet
 import './BookShelf.css';
@@ -95,9 +96,11 @@ export default class BookShelf extends Component {
 
         <Header>My Reads</Header>
 
-        <MyBooks/>
+        <MyBooks />
 
         <Link className='bShelf-search' to='/search'>Search Book</Link>
+
+        <Footer />
 
       </div>
     );
