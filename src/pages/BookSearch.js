@@ -60,8 +60,8 @@ export default class BookSearch extends Component {
 
   handleAddBook = (book, shelf) => {
     const { query } = this.state;
-    // Validation of arguments
-    if(typeof(book) === 'object' && typeof(shelf) === 'string') BooksAPI.update(book, shelf).then(() => this.handleSearch(query));
+
+    BooksAPI.update(book, shelf).then(() => this.handleSearch(query));
 
   }
 
