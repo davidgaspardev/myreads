@@ -54,7 +54,7 @@ export const Book = ({ id, title, subtitle, authors, imageLinks, shelf, eventAdd
 
       <div className='book-container-img' >
 
-        <img src={typeof(imageLinks) !== 'undefined' && imageLinks.thumbnail } alt={`${title} book`} />
+        <img src={typeof(imageLinks) !== 'undefined' ? imageLinks.thumbnail : require('../icons/not-image.png') } alt={`${title} book`} />
 
         <div className='book-button'>
           <select defaultValue={shelf} onChange={option => eventAddBook({ id: id }, option.target.value)} >

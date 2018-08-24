@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 // Pages
 import BookShelf from './pages/BookShelf';
 import BookSearch from './pages/BookSearch';
 
-export default class App extends Component {
+const App = () => (
+  <div className='container'>
 
-  render() {
-    return (
-      <div className='container'>
+    <Route exact path='/' component={BookShelf}  />
+    <Route path='/search' component={BookSearch} />
 
-        <Route exact path='/' component={BookShelf}  />
-        <Route path='/search' component={BookSearch} />
+  </div>
+);
 
-      </div>
-    );
-  }
-}
+export default App;

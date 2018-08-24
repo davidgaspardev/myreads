@@ -28,10 +28,9 @@ export default class BookShelf extends Component {
 
   handleAddBook = (book, shelf) => {
 
-    console.log(shelf);
-
     // Validation of arguments
-    if(typeof(book) === 'object' && typeof(shelf) === 'string') BooksAPI.update(book, shelf).then(() => this.renderShelfUpdate());
+    if(typeof(book) === 'object' && typeof(shelf) === 'string')
+      BooksAPI.update(book, shelf).then(() => this.renderShelfUpdate());
 
   }
 
@@ -41,11 +40,12 @@ export default class BookShelf extends Component {
 
     if(state.isLoading) return <div className='bShelf-loading' />;
 
-    let shelves = state[shelf].map((book, index) => <Book key={index} {...book} eventAddBook={this.handleAddBook} />);
+    let shelves = state[shelf].map(book => <Book key={book.id} {...book} eventAddBook={this.handleAddBook} />);
 
-    if(shelves.length > 0) return shelves;
-    // If you have nothing on the shelf
-
+    if(shelves.length > 0)
+      return shelves;
+    else
+      return null;
 
   }
 
@@ -60,15 +60,8 @@ export default class BookShelf extends Component {
         isLoading: false
       };
 
-      console.log(books);
-
-      books.map(book => {
-
-        newState[book.shelf].push(book);
-
-        return book;
-
-      });
+      // Inserting a books from a certain shelf to the nconsoleew state
+      books.forEach(book => newState[book.shelf].push(book) );
 
       return newState;
 
@@ -107,7 +100,7 @@ export default class BookShelf extends Component {
   }
 
   /**
-   * ============ Functinal Stateless Components ============
+   * ============ Stateless Functional Component ============
    * @description Local components for UI composition
    */
   Header = ({ children }) => (
@@ -118,53 +111,55 @@ export default class BookShelf extends Component {
     </header>
   );
 
-  MyBooks = () => (
-    <main className='bShelf-main'>
+  MyBooks = () => {
 
-      <article>
+    const shelf = {
+      CURRENTLY_READING: 'currentlyReading',
+      WANT_TO_READ: 'wantToRead',
+      READ: 'read'
+    }
 
-        <h2><strong>C</strong>urrently <strong>R</strong>eading</h2>
+    return (
+      <main className='bShelf-main'>
 
-        <div className='bShelf-items'>
+        <article>
 
-          { this.handleShowBooks(Object.keys(this.state)[0]) }
+          <h2><strong>C</strong>urrently <strong>R</strong>eading</h2>
 
-        </div>
+          <div className='bShelf-items'>
 
-      </article>
+            { this.handleShowBooks(shelf.CURRENTLY_READING) }
 
-      <article>
+          </div>
 
-        <h2><strong>W</strong>ant to <strong>R</strong>ead</h2>
+        </article>
 
-        <div className='bShelf-items'>
+        <article>
 
-          { this.handleShowBooks(Object.keys(this.state)[1]) }
+          <h2><strong>W</strong>ant to <strong>R</strong>ead</h2>
 
-        </div>
+          <div className='bShelf-items'>
 
-      </article>
+            { this.handleShowBooks(shelf.WANT_TO_READ) }
 
-      <article>
+          </div>
 
-        <h2><strong>R</strong>ead</h2>
+        </article>
 
-        <div className='bShelf-items'>
+        <article>
 
-          { this.handleShowBooks(Object.keys(this.state)[2]) }
+          <h2><strong>R</strong>ead</h2>
 
-        </div>
+          <div className='bShelf-items'>
 
-      </article>
+            { this.handleShowBooks(shelf.READ) }
 
-    </main>
-  );
+          </div>
 
+        </article>
 
-  Footer = () => (
-    <footer>
-
-    </footer>
-  );
+      </main>
+    );
+  }
 
 }

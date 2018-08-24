@@ -22,10 +22,10 @@ export default class BookSearch extends Component {
   constructor(props) {
     super(props);
 
-    this.handleAddBook = this.handleAddBook.bind(this);
-
-    // It do not need to refresh the rendering
+    // It is not need to use setState method(function)
     BooksAPI.getAll().then(myBooks => this.state.myBooks = myBooks);
+
+    this.handleAddBook = this.handleAddBook.bind(this);
 
   }
 
@@ -38,7 +38,7 @@ export default class BookSearch extends Component {
   }
 
 
-  handleSearch(query) {
+  handleSearch(query, myBooks) {
 
     this.setState({ isLoading: query !== '' }, () => (
 
@@ -50,7 +50,15 @@ export default class BookSearch extends Component {
         if(!Array.isArray(books)) books = [];
 
         // Finish loading
-        this.setState({ books, isLoading: false });
+        this.setState(() => {
+
+          let state = { books, isLoading: false };
+
+          if(typeof(myBooks) === 'object') state.myBooks = myBooks;
+
+          return state;
+
+        });
 
       })
 
@@ -61,35 +69,42 @@ export default class BookSearch extends Component {
   handleAddBook = (book, shelf) => {
     const { query } = this.state;
 
-    BooksAPI.update(book, shelf).then(() => this.handleSearch(query));
+    BooksAPI.update(book, shelf).then(() => {
+
+      BooksAPI.getAll().then(myBooks => this.handleSearch(query, myBooks));
+
+    });
 
   }
 
-  handleBookRender() {
+  renderBooks() {
     const { query, books, myBooks } = this.state;
 
-    if(query === '') {
-
+    if(query === '')
       return <h1 className='bSearch-empty-entry' >Type something to do your research</h1>;
-
-    }
 
     if(books.length > 0) {
 
-      return books.map((book, index) => {
+      // If the book is found, return this:
+      return books.map(book => {
 
         for(var i = 0; i < myBooks.length; i++) {
 
-          if(book.id === myBooks[i].id) return <Book key={index} {...book} eventAddBook={ this.handleAddBook } shelf={ myBooks[i].shelf } />;
+          // If the book is already on some shelf
+          if(book.id === myBooks[i].id)
+            // If: Break line to stay more readable (recommended Udacity)
+            return <Book key={book.id} {...book} eventAddBook={ this.handleAddBook } shelf={ myBooks[i].shelf } />;
 
         }
 
-        return <Book key={index} {...book} eventAddBook={ this.handleAddBook } />;
+        // Return book without shelf (none)
+        return <Book key={book.id} {...book} eventAddBook={ this.handleAddBook } />;
 
       });
 
     } else {
 
+      // If the book is not found, return this:
       return <h1 className='bSearch-empty-entry' >We did not find this book ... Sorry</h1>;
 
     }
@@ -118,7 +133,7 @@ export default class BookSearch extends Component {
   }
 
   /**
-   * ============ Functinal Stateless Components ============
+   * ============ Stateless Functional Component ============
    * @description Local components for UI composition
    */
 
@@ -158,7 +173,7 @@ export default class BookSearch extends Component {
 
         ) : (
 
-          this.handleBookRender()
+          this.renderBooks()
 
         )
       }
